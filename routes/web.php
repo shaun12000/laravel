@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route; 
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,15 @@ Route::middleware('guest')->group(function(){
     Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
     Route::get('login', [AuthController::class, 'login'])->name('login');
     Route::post('register',[AuthController::class,'createRegistrationForm']);
+    Route::post('login', [AuthController::class, 'loginattempt']);
+    
 
 });
+
+Route::middleware('auth')->group(function(){
+
+    Route::get('dashboard', [AuthController::class, 'dashboardshow'])->name('dashboard');
+    
+});
+
 
