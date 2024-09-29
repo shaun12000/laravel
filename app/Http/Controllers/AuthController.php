@@ -36,6 +36,8 @@ class AuthController extends Controller
 
         ]);
 
+        Auth::login($user);
+
 
         return redirect()->route('register')->with('success', 'successfull');
     }
@@ -51,19 +53,19 @@ class AuthController extends Controller
 
     public function loginattempt(Request $request)
     {
-      
+
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        
-    
+
+
 
         if (Auth::attempt($credentials)) {
-           
+
 
             $request->session()->regenerate();
-           
+
             return redirect()->route('dashboard')->with('success', 'successfully');
         }
 
@@ -74,8 +76,21 @@ class AuthController extends Controller
 
 
 
- public function dashboardshow(){
-    return view('admin.dashboard');
- }
+    public function dashboardshow()
+    {
+        return view('admin.dashboard');
+    }
 
+
+
+    public function logout(Request $request)
+    {
+
+        
+      
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerate();
+        return redirect()->route('login')->with('success','logout');
+    }
 }

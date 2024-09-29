@@ -21,16 +21,14 @@
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
 
-                       @if ($errors->any())
-                          <div class="alert alert-danger">
+                                    @if ($errors->any())
+                            <div class="alert alert-danger">
+                                @foreach ($errors->all() as $err )
+                                <p>{{ $err}}</p>
+                                @endforeach
 
-                            @foreach ($errors as $err )
-                                <p>{{$err}}</p>
-                            @endforeach
-                          </div>
-
-                           
-                       @endif
+                            </div>
+                            @endif
 
 
                        @if (session('success'))
@@ -79,7 +77,7 @@
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <a class="small" href="{{url('register')}}">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
