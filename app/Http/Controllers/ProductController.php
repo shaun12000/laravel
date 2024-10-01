@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -27,15 +28,42 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=> 'required|string|max:255',
+            'price'=> 'numeric||max:999',
+            'quantity'=> 'numeric|integer|min:0',
+            'description'=> 'string|nullable|max:500',
+            'image'=> 'nullable|mimes:png,jpg,pdf|max:2048',
+        ], [ 'price.max' =>'max 99999']
+    );
+
+        if ($request->hasFile('image')) {
+            $imagepath= $request->file('image')->store('img' ,'public');
+        }
+        else{
+            $imagepath = null;
+        }
+
+  $product = new Product();
+  $product->name = $request->name;
+  $product->price = $request->price;
+  $product->quantity = $request->quantity;
+  $product->description = $request->description;
+  $product->image = $imagepath;
+  $product->save();
+  return redirect('products')->with('success','successfully');
+
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        
+       
+        $product = Product::all();
+        return view('product.productall', compact('product'));
     }
 
     /**
@@ -59,6 +87,16 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+       
+        $product = Product::find($id);
+        if($product){
+            $product->delete();
+            return redirect()->back()->with('success','successfully');
+        }
+       
+        else{
+            return redirect()->back()->withErrors('Product not found.');
+        }
+        
     }
 }

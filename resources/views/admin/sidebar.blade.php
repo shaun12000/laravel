@@ -27,7 +27,19 @@
         <li class="nav-item">
             <a class="nav-link" href="{{url('products/create')}}">
                 <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
+                <span>product create</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{url('category/create')}}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Category</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{url('products/show')}}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Products</span></a>
         </li>
 
         <!-- Divider -->

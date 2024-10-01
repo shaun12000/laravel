@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,8 +30,12 @@ Route::middleware('auth')->group(function(){
 
     Route::get('dashboard', [AuthController::class, 'dashboardshow'])->name('dashboard');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout')->middleware('prevetGetLogout');
+    Route::resource('products', ProductController::class);
+    Route::resource('category', CategoryController::class);
+    
+
     
 });
 
-Route::resource('products', ProductController::class)->middleware('auth');
+
 
