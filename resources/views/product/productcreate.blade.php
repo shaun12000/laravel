@@ -25,6 +25,21 @@
     <!-- Product create form -->
     <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data" >
         @csrf
+
+
+        <div class="form-group">
+        <label for="category">Select a category:</label>
+<select id="category" name="category_id">
+   
+    @foreach ( $allcategory as $allcat )
+        
+  
+    <option value="{{$allcat->id}}">{{$allcat->name}}</option>
+    @endforeach
+</select> 
+        </div>
+
+         
         <div class="form-group">
             <label for="name">Product Name</label>
             <input type="text" name="name" class="form-control" id="name" placeholder="Enter product name" >

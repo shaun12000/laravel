@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -20,7 +21,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.productcreate');
+        
+            $allcategory = category::all();
+          
+         
+        
+        return view('product.productcreate', compact('allcategory'));
     }
 
     /**
@@ -29,6 +35,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'category_id'=>'required',
             'name'=> 'required|string|max:255',
             'price'=> 'numeric||max:999',
             'quantity'=> 'numeric|integer|min:0',
@@ -45,6 +52,7 @@ class ProductController extends Controller
         }
 
   $product = new Product();
+  $product->category_id = $request->category_id;
   $product->name = $request->name;
   $product->price = $request->price;
   $product->quantity = $request->quantity;

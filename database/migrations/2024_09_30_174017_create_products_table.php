@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('description')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->unsignedBigInteger('category_id');
 
         });
     }

@@ -62,7 +62,7 @@
             <tr>
                 <th>Name</th>
                 <th>Slug</th>
-                <th>Actions</th>
+                
             </tr>
         </thead>
         <tbody>
