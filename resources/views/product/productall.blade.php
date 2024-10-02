@@ -28,6 +28,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>Category</th>
                                             <th>Name</th>
                                             <th>price</th>
                                             <th>quantity</th>
@@ -45,6 +46,7 @@
                                         
                                     
                                         <tr>
+                                            <td>{{$products->category->name}}</td>
                                             <td>{{$products->name}}</td>
                                             <td>{{$products->price}}</td>
                                             <td>{{$products->quantity}}</td>

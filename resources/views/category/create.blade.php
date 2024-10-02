@@ -62,6 +62,7 @@
             <tr>
                 <th>Name</th>
                 <th>Slug</th>
+                <th>product</th>
                 
             </tr>
         </thead>
@@ -76,8 +77,13 @@
                 @foreach($allcategory as $category)
                     <tr>
                         <td>{{ $category->name }}</td>
-                        <td>{{ $category->slug }}</td>
                         
+                        <td>{{ $category->slug }}</td>
+                        <td>
+                            @foreach ($category->product as $pro )
+                                {{$pro->name}} |  {{$pro->price}} 
+                            @endforeach
+                        </td>
                     </tr>
                 @endforeach
             @endif

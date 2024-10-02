@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use App\Models\category;
+use App\Models\Product;
 class CategoryController extends Controller
 {
     /**
@@ -21,7 +22,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $allcategory = category::all();
+        $allcategory = category::with('product')->get();
       
         return view('category.create', compact('allcategory'));
     }
@@ -51,9 +52,7 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        $allcategory = category::all();
       
-       return view('category.create', compact('allcategory'));
     }
 
     /**
