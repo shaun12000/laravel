@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use App\Models\category;
-use App\Models\Product;
 class CategoryController extends Controller
 {
     /**
@@ -52,6 +51,7 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
+        $allcategory = category::all();
       
     }
 

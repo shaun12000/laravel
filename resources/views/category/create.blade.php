@@ -62,14 +62,13 @@
             <tr>
                 <th>Name</th>
                 <th>Slug</th>
-                <th>product</th>
-                
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-
+          
         
-            @if($allcategory->isEmpty())
+            @if( isset($allcategory) && $allcategory->isEmpty())
                 <tr>
                     <td colspan="3">No categories found.</td>
                 </tr>
