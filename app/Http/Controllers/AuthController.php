@@ -58,7 +58,8 @@ class AuthController extends Controller
 
 
 public function otp(){
-    return view ('verify-email');
+    $email = session('email');
+    return view ('verify-email' , compact('email'));
 }
 
 
@@ -66,11 +67,11 @@ public function otp_verify(Request $request){
 
   
             $request->validate([
-                'otp'=>'required'
+                'otp'=>'required',
+                'email'=>'required'
             ]);
-            
             $user = User::where('email', $request->email)->first();
-            dd($user->email);
+
 
 
             if(!$user){
@@ -83,6 +84,7 @@ public function otp_verify(Request $request){
                 $user->otp = null;
                 $user->otp_expire=null;
                 $user->save();
+                Auth::login($user);
     return redirect()->route('dashboard')->with('success', 'Email verified successfully! You can now access your dashboard.');
 
 

@@ -31,7 +31,7 @@
                         
                         <div class="form-group">
 
-                            <input type="hidden" name="email" value="{{old('email' , $email)}}">
+                            <input type="hidden" name="email" value="{{$email}}">
                             <label for="otp_code">{{ __('Enter the 6-digit OTP sent to your email') }}</label>
                             <input id="otp" type="text" class="form-control" name="otp">
 
