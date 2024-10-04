@@ -22,6 +22,8 @@ Route::middleware('guest')->group(function(){
     Route::get('login', [AuthController::class, 'login'])->name('login');
     Route::post('register',[AuthController::class,'createRegistrationForm']);
     Route::post('login', [AuthController::class, 'loginattempt']);
+    Route::get('otp', [AuthController::class ,'otp'])->name('otp');
+    Route::post('otp', [AuthController::class ,'otp_verify'])->name('otp-verify');
     
 
 });

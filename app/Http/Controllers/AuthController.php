@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+Use App\Mail\OTPverificationMail;
 
 
 class AuthController extends Controller
@@ -32,16 +36,59 @@ class AuthController extends Controller
             "email" => $request->email,
             "password" => Hash::make($request->password),
             "fname" => $request->fname,
-            "lname" => $request->lname
+            "lname" => $request->lname,
+            
 
         ]);
 
-        Auth::login($user);
+        $otp = Str::random(6);
+        $user->otp = $otp;
+        $user->otp_expire = Carbon::now()->addMinutes(10);
+        $user->save();
+
+        Mail::to($user->email)->send(new OTPverificationMail($otp));
+
+     
 
 
-        return redirect()->route('register')->with('success', 'successfull');
+        return redirect()->route('otp')->with('email', $user->email);
+
     }
 
+
+
+public function otp(){
+    return view ('verify-email');
+}
+
+
+public function otp_verify(Request $request){
+
+  
+            $request->validate([
+                'otp'=>'required'
+            ]);
+            
+            $user = User::where('email', $request->email)->first();
+            dd($user->email);
+
+
+            if(!$user){
+                return back()->withErrors(['email' => 'user not found']);
+            }
+
+            if($request->otp == $user->otp && Carbon::now()->lt($user->otp_expire)){
+
+                $user->email_verified_at = now();
+                $user->otp = null;
+                $user->otp_expire=null;
+                $user->save();
+    return redirect()->route('dashboard')->with('success', 'Email verified successfully! You can now access your dashboard.');
+
+
+}        return back()->withErrors(['otp' => 'expired']);
+
+}
 
 
     //login
