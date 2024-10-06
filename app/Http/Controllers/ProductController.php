@@ -17,7 +17,7 @@ class ProductController extends Controller
         $allcategory = category::all();
           
          
-        
+        return response()->json($allcategory);
         return view('product.productcreate', compact('allcategory'));
     }
 
@@ -64,7 +64,7 @@ class ProductController extends Controller
   $product->description = $request->description;
   $product->image = $imagepath;
   $product->save();
-  return redirect('products')->with('success','successfully');
+  return response()->json(['message' => 'Product created successfully!', 'product' => $product]);
 
     }
 

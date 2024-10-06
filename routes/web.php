@@ -23,7 +23,11 @@ Route::middleware('guest')->group(function(){
     Route::post('register',[AuthController::class,'createRegistrationForm']);
     Route::post('login', [AuthController::class, 'loginattempt']);
     Route::get('otp', [AuthController::class ,'otp'])->name('otp');
+    Route::get('otpp', function(){
+        return view('emails.otpverification');
+    });
     Route::post('otp', [AuthController::class ,'otp_verify'])->name('otp-verify');
+    Route::get('switch/{lang}', [languageController::class ,'index'])->name('lang');
     
 
 });

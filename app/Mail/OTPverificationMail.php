@@ -28,7 +28,7 @@ class OTPverificationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'O T Pverification Mail',
+            subject: 'OTP verification Mail',
         );
     }
 
@@ -40,6 +40,10 @@ class OTPverificationMail extends Mailable
         return new Content(
             view: 'emails.otpverification',
         );
+    }
+
+    public function build(){
+        return $this->view('emails.otpverification')->with('otp', $this->otp);
     }
 
     /**

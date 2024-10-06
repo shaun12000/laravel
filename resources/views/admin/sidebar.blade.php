@@ -18,7 +18,10 @@
         <li class="nav-item active">
             <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
+               
+
+                <span>{{ __('message.Dashboard')}}</span></a>
+                
         </li>
 
        
@@ -168,6 +171,12 @@
                     <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                 </div>
             </li>
+<a href="{{ route('lang', 'en') }}">
+    <img src="{{ asset('icons/en.png') }}" alt="English">
+</a>
+<a href="{{ route('lang', 'es') }}">
+    <img src="{{ asset('icons/es.png') }}" alt="Spanish">
+</a>
 
             <!-- Nav Item - Messages -->
             <li class="nav-item dropdown no-arrow mx-1">
@@ -250,7 +259,10 @@
                     aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Profile
+                        {{ __('message.Profile')}}
+                        <p>Current Locale: {{ App::getLocale() }}</p>
+<p>Session Locale: {{ session('applocale') }}</p>
+
                     </a>
                     <a class="dropdown-item" href="#">
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
